@@ -23,3 +23,10 @@ h1 {
   font-size: 20px;
   font-weight: bold;
 }
+
+#reset-game {
+  display: inline-block;
+  position: absolute;
+  margin-top: 180px;
+  margin-left: 300px;
+}
