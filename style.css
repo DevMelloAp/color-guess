@@ -27,6 +27,13 @@ h1 {
 #reset-game {
   display: inline-block;
   position: absolute;
-  margin-top: 180px;
-  margin-left: 300px;
+  margin-top: 40px;
+  margin-left: -60px;
+}
+
+#score {
+  display: inline-block;
+  position: absolute;
+  margin-top: -34px;
+  margin-left: 405px;
 }

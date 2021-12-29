@@ -1,52 +1,47 @@
+const colorBalls = document.querySelectorAll('.ball');
+const colorGuess = document.querySelector('#rgb-color');
+const answer = document.getElementById('answer');
+const balls = document.querySelectorAll('.ball');
+
+// Criando uma função para gerar uma cor Hexadecimal:
+
+function gerarCorHexadecimal() {
+  return `#${Math.floor(Math.random() * 0x1000000).toString(16).padStart(6, '0')}`;
+}
+
+// Criando uma função para alterar as cores das bolas e também mensagens de acerto ou erro, incrementando o placar em caso de acerto.
+
+function resetGame() {
+  colorBalls.forEach((item, index, colorBall) => {
+    colorBall[index].style.backgroundColor = gerarCorHexadecimal();
+  });
+  colorGuess.innerHTML = colorBalls[Math.floor(Math.random() / 0.19)].style.backgroundColor;
+
+  answer.innerHTML = 'Escolha uma cor';
+  balls.forEach((item, index, bolas) => {
+    const score = document.getElementById('score');
+    const placar = parseInt(score.innerHTML);
+    bolas[index].addEventListener('click', () => {
+      if (bolas[index].style.backgroundColor === colorGuess.innerHTML) {
+        answer.innerHTML = 'Acertou!';
+        score.innerHTML = placar + 3;
+      } else {
+        answer.innerHTML = 'Errou! Tente novamente!';
+      }
+    });
+  });
+}
+
 window.onload = () => {
-  for (let i = 0; i < 6; i += 1) {
-    const body = document.querySelector('#body');
-    const balls = document.createElement('div');
-    body.appendChild(balls);
-    balls.className = 'ball';
-  }
-
-  function colorGuess() {
-    function gerarCorHexadecimal() {
-      return `#${Math.floor(Math.random() * 0x1000000).toString(16).padStart(6, '0')}`;
-    }
-
-    function colorir(item, index, colorBalls) {
-      colorBalls[index].style.backgroundColor = gerarCorHexadecimal();
-    }
-    const colorBalls = document.querySelectorAll('.ball');
-    colorBalls.forEach(colorir);
-
-    const colorGuess = document.querySelector('#rgb-color');
-    colorGuess.innerHTML = colorBalls[Math.floor(Math.random() / 0.19)].style.backgroundColor;
-
-    const body = document.querySelector('#body');
-    const answer = document.createElement('div');
-    body.appendChild(answer);
-    answer.id = 'answer';
-
-    const resposta = document.getElementById('answer');
-    resposta.innerHTML = 'Escolha uma cor';
-
-    function selected(item, index, bolas) {
-      bolas[index].addEventListener('click', () => {
-        if (bolas[index].style.backgroundColor === colorGuess.innerHTML) {
-          resposta.innerHTML = 'Acertou!';
-        } else {
-          resposta.innerHTML = 'Errou! Tente novamente!';
-        }
-      });
-    }
-
-    const bolas = document.querySelectorAll('.ball');
-    bolas.forEach(selected);
-  }
-  colorGuess();
-
-  const buttonReset = document.getElementById('reset-game');
-  buttonReset.innerHTML = 'Resetar o jogo/cores';
-  buttonReset.addEventListener('click', colorGuess);
+  resetGame();
 };
+
+// Criando um botão para resetar o jogo/cores:
+
+const buttonReset = document.getElementById('reset-game');
+buttonReset.innerHTML = 'Resetar o jogo/cores';
+buttonReset.addEventListener('click', resetGame);
+
 
 /* function gerarCorHexadecimal criada com base em uma resposta do stackoverflow, conforme link abaixo:
 
